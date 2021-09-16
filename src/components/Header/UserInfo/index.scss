@@ -1,0 +1,29 @@
+header {
+  .UserInfo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+    &--name {
+      text-align: center;
+
+    }
+    &--status {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--accent-2);
+      position: relative;
+      text-align: center;
+      font-size: 13px;
+
+      &--circle {
+        border-radius: 50%;
+        width: 7px;
+        height: 7px;
+        background: var(--primary);
+        margin-right: 5px;
+      }
+    }
+  }
+}

@@ -1,0 +1,184 @@
+@mixin add-button-style-in-message {
+  margin-left: 10px;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  flex-shrink: 0;
+}
+
+%visible-add-button-style-in-message {
+  opacity: 1;
+  visibility: visible;
+}
+
+.dialog {
+  .item {
+    display: flex;
+    margin: 10px 0;
+
+    &--avatar {
+      flex-shrink: 0;
+      height: 35px;
+      width: 35px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-top: auto;
+      margin-right: 10px;
+    }
+
+    .list {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+
+      .list--item {
+        display: flex;
+        align-items: center;
+        margin-top: 5px;
+
+        .item--text {
+          max-width: 400px;
+          padding: 5px 8px;
+          border-radius: 5px;
+          word-break: break-word;
+          background: var(--accent-1);
+        }
+        .item--time {
+          font-size: 13px;
+          color: var(--accent-2);
+          margin-left: 10px;
+          opacity: 0;
+          visibility: hidden;
+        }
+        .item--message {
+          &__status {
+            display: none;
+            path {
+              fill: var(--primary);
+            }
+          }
+        }
+
+        &:first-child {
+          .item--text {
+            padding-top: 7px;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+          }
+        }
+        &:last-child {
+          .item--text {
+            padding-bottom: 7px;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+          }
+          svg.item--message__status {
+            display: block;
+          }
+        }
+
+        &:hover {
+          .item--time {
+            @extend %visible-add-button-style-in-message
+          }
+        }
+
+        &:last-child {
+          .item--time {
+            @extend %visible-add-button-style-in-message
+          }
+        }
+      }
+    }
+
+
+    /*
+     * исходный селекторы
+     * .item.removable .list--item:hover svg.item--message__remove-message{
+     *     opacity: 1;
+     *    visibility: visible;
+     * }
+    */
+
+    /*
+     * &.removable .list--item:hover svg.item--message__remove-message {
+     *   @extend %visible-add-button-style-in-message
+     * }
+    */
+
+    // * vs
+    &.removable {
+      .list--item {
+        &:hover {
+          svg {
+            &.item--message__remove-message {
+              @extend %visible-add-button-style-in-message
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .item.reverse {
+    flex-direction: row-reverse;
+    .item--avatar {
+      margin-right: 0;
+      margin-left: 10px;
+    }
+
+    .list--item {
+      flex-direction: row-reverse;
+
+      .item--text {
+        padding-top: 7px;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+      }
+      .item--time {
+        margin-left: 0;
+        margin-right: 10px;
+      }
+
+      &:last-child {
+        svg.item--message__status {
+          @extend %visible-add-button-style-in-message
+        }
+      }
+    }
+
+    svg.item--message__status,
+    svg.item--message__remove-message {
+      margin-left: 0;
+      margin-right: 10px;
+    }
+
+    svgitem--message__remove-message  {
+      margin-right: 5px;
+    }
+  }
+
+  svg.item--message__status,
+  svg.item--message__remove-message {
+    @include add-button-style-in-message
+  }
+
+  svg {
+    .item--message__status {
+      display: none;
+    }
+
+    .item--message__status path {
+      fill: var(--primary);
+    }
+
+    .item--message__remove-message path {
+      fill: var(--error);
+    }
+
+    &.item--message__remove-message {
+      margin-left: 5px;
+    }
+  }
+
+}

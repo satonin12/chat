@@ -1,8 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import WebFontLoader from 'webfontloader'
+
+// import components and other ...
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+
+// import css
+import './styles/index.scss'
+
+// import webfont
+WebFontLoader.load({
+  google: {
+    families: ["Open Sans:300,400,700"],
+  },
+})
+
 
 ReactDOM.render(
   <React.StrictMode>
